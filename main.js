@@ -170,11 +170,22 @@ var ajax=function(url,callback)
 }
 
 var DataDir='';//'//orteil.dashnet.org/data/';
-DataDir='orteil.dashnet.org/data/';
+DataDir='https://orteil.dashnet.org/data/';
 
 var getJson=function(url,callback,error)
 {
-	if (Game.local) return false;
+	url=url.replace(DataDir, 'https://api.plasma4.org/');
+	if(url === 'https://api.plasma4.org/version.json') {return { "Cookie Clicker": { "v":2.052, "updateNotes":"new building!" }, "Cookie Clicker beta": { "v":2.052, "updateNotes":"new building!" }, }}
+	else if (url === 'https://api.plasma4.org/cookieclickerinfo.json') {return { "versions":[ {"text":"Latest","v":"LIVE","url":"$DIR/cookieclicker"}, {"text":"Try the beta!","v":"BETA","url":"$DIR/cookieclicker/beta"}, {"text":"v.2.052 <small>(2023)</small>","v":2.052,"url":"$DIR/cookieclicker/v2052"}, {"text":"v.1.0466 <small>(2014)</small>","v":1.0466,"url":"$DIR/cookieclicker/v10466"}, {"text":"Classic <small>(2013)</small>","v":"CLASSIC","url":"$DIR/experiments/cookie"} ], "links":[ {"text":"<img src=\"img/topbarSteam.png\" style=\"margin-left:0px;\"> Steam","tooltip":"Play Cookie Clicker on Steam!<br>Featuring music by C418.","style":"padding-left:26px;","class":"promoLink","url":"https://store.steampowered.com/app/1454400/Cookie_Clicker/","remove":"topbarSteamCC+"}, {"text":"<img src=\"img/topbarMobile.png\" style=\"margin-left:2px;\"> Android","tooltip":"Play Cookie Clicker on your phone!","style":"padding-left:20px;","class":"promoLink","url":"https://play.google.com/store/apps/details?id=org.dashnet.cookieclicker","remove":"topbarMobileCC+"}, {"off":1,"text":"<img src=\"img/topbarXbox.png\" style=\"margin-left:0px;\"><img src=\"img/topbarPS.png\" style=\"margin-left:22px;\"><img src=\"img/topbarSwitch.png\" style=\"margin-left:44px;\"><span class=\"hideCompressed\" style=\"padding-left:8px;\">Consoles</span>","tooltip":"Play Cookie Clicker on Xbox, PlayStation and Nintendo Switch!","style":"padding-left:60px;","class":"promoLink","url":"https://cookieclicker.com/"}, {"text":"Consoles","tooltip":"Play Cookie Clicker on Xbox, PlayStation and Nintendo Switch!","class":"promoLink","url":"https://cookieclicker.com/"}, {"text":"<img src=\"img/fangamerClickerPic.png\" style=\"margin-left:2px;margin-top:2px;\"> Cookie Clicker clicker<div style=\"position:absolute;right:8px;bottom:3px;font-size:10px;\">by Fangamer</div>","style":"padding-left:40px;","tooltip":"Clicky merch by Fangamer!<br>There's shirts too!","class":"promoLink","url":"https://fanga.me/r/cookie-clicker-collection"} ], "extraCss":["#topBar .promoLink a{color:#06c;}"] }}
+	else if (url === 'https://api.plasma4.org/cookieclickersteam.json') {
+		url = 'https://api.plasma4.org/latest.json';
+	}
+	else if (url === 'https://api.plasma4.org/grandmas.json') {
+		url = 'https://api.plasma4.org/users.json';
+	} else {
+		return false;
+	}
+	// if (window.Game&&Game.local) return false;
 	var xhr=new XMLHttpRequest();
 	if (!xhr){return false;}
 	xhr.onreadystatechange=function()
