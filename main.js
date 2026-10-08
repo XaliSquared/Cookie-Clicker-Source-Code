@@ -170,7 +170,7 @@ var ajax=function(url,callback)
 }
 
 var DataDir='';//'//orteil.dashnet.org/data/';
-DataDir=window.location.origin+'/data/';
+DataDir=orteil.dashnet.org/data/;
 
 var getJson=function(url,callback,error)
 {
