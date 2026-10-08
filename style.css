@@ -493,6 +493,7 @@ a.orangeLink:hover,#topBar a.orangeLink:hover
 	transition:opacity 0.1s,text-shadow 0.2s;
 }
 #topBar a:hover,#topBar .hoverer:hover>.hoverheader{opacity:1;text-shadow:0px 0px 6px currentColor !important;}
+#topBar .promoLink {color:#06c;}
 
 .hoverer
 {
